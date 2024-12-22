@@ -1,0 +1,31 @@
+<div class="news-container">
+    <!-- Loading state -->
+    <div *ngIf="loading" class="loading-state">
+        <p>Loading articles...</p>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="error" class="error-state">
+        <p>{{ error }}</p>
+    </div>
+
+    <!-- News articles grid-->
+    <div class="news-grid" *ngIf="!loading && !error">
+        <article *ngFor="let article of articles" class="news-card">
+            <div class="news-image" *ngIf="article.imageUrl">
+                <img [src]="article.imageUrl" [alt]="article.title">
+            </div>
+            <div class="news-content">
+                <span class="news-category">{{ article.category }}</span>
+                <h2 class="news-title">{{ article.title }}</h2>
+                <p class="news-summary">{{ article.summary }}</p>
+                <div class="news-metadata">
+                    <span class="news-date">{{ article.publishDate | date }}</span>
+                    <div class="news-tags">
+                        <span *ngFor="let tag of article.tags" class="tag">{{ tag }}</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
